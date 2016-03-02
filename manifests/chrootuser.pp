@@ -6,7 +6,7 @@ define proftpd::chrootuser(
                             $allowdupe=false,
                             $uid=undef,
                             $gid=undef,
-                            $shell='/bin/bash',
+                            $shell='/bin/false',
                           ) {
   #
 
