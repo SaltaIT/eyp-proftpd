@@ -1,4 +1,6 @@
 #shamesly stolen from: https://github.com/puppetlabs/puppetlabs-apache/blob/master/lib/puppet/parser/functions/bool2httpd.rb
+# with minor changes
+#
 #
 #Copyright (C) 2012 Puppet Labs Inc
 #
