@@ -8,26 +8,16 @@
 #
 #
 Puppet::Parser::Functions::newfunction(:bool2onoff, :type => :rvalue, :doc => <<-EOS
-Transform a supposed boolean to On or Off. Pass all other values through.
-Given a nil value (undef), bool2onoff will return 'Off'
-Example:
-    $trace_enable     = false
-    $server_signature = 'mail'
-    bool2onoff($trace_enable)
-    # => 'Off'
-    bool2onoff($server_signature)
-    # => 'mail'
-    bool2onoff(undef)
-    # => 'Off'
+Transform a supposed boolean to On or Off. Other values through.
 EOS
 ) do |args|
   raise(Puppet::ParseError, "bool2onoff() wrong number of arguments. Given: #{args.size} for 1)") if args.size != 1
 
   arg = args[0]
 
-  if arg.nil? or arg == false or arg =~ /false/i or arg == :undef
+  if arg.nil? or arg == false or arg =~ /false/i or arg =~ /off/i or arg == :undef
     return 'off'
-  elsif arg == true or arg =~ /true/i
+  elsif arg == true or arg =~ /true/i or arg =~ /on/i
     return 'on'
   end
 
