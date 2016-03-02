@@ -1,4 +1,4 @@
-define proftpd::chrootuser(
+define proftpd::user(
                             $username=$name,
                             $password=undef,
                             $home=undef,
@@ -7,8 +7,19 @@ define proftpd::chrootuser(
                             $uid=undef,
                             $gid=undef,
                             $shell='/bin/false',
+                            $chroot=true,
                           ) {
   #
+  if($chroot)
+  {
+    $groups=[ 'ftpchroot' ]
+    $require=Group['ftpchroot']
+  }
+  else
+  {
+    $groups=undef
+    $require=undef
+  }
 
   user { $username:
     uid        => $uid,
@@ -17,10 +28,9 @@ define proftpd::chrootuser(
     managehome => $managehome,
     home       => $home,
     allowdupe  => $allowdupe,
-    groups     => [ 'ftpchroot' ],
+    groups     => $groups,
     shell      => $shell,
-    require    => Group['ftpchroot'],
-
+    require    => $require,
   }
 
 }
