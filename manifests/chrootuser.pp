@@ -6,6 +6,7 @@ define proftpd::chrootuser(
                             $allowdupe=false,
                             $uid=undef,
                             $gid=undef,
+                            $shell='/bin/bash',
                           ) {
   #
 
@@ -17,7 +18,7 @@ define proftpd::chrootuser(
     home       => $home,
     allowdupe  => $allowdupe,
     groups     => [ 'ftpchroot' ],
-    shell      => '/bin/bash', #TODO, gestio shells
+    shell      => $shell,
     require    => Group['ftpchroot'],
 
   }
