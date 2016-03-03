@@ -1,5 +1,12 @@
 #
-class proftpd () inherits proftpd::params {
+class proftpd (
+                $port='21',
+                $use_ipv6=false,
+                $servername='private server',
+                $serverident=undef,
+                $deferwelcome=true,
+                $require_valid_shell=false,
+              ) inherits proftpd::params {
 
   #
   Exec {

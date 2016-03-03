@@ -1,6 +1,6 @@
 {
   "name": "eyp-proftpd",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": "eyp",
   "summary": "proftpd with chroot",
   "license": "Apache-2.0",
@@ -13,7 +13,7 @@
   "operatingsystem_support": [
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "14.04", "14.10" ]
+      "operatingsystemrelease": [ "14.04" ]
     }
   ]
 }

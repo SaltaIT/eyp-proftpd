@@ -8,38 +8,42 @@
 Include /etc/proftpd/modules.conf
 
 # Set off to disable IPv6 support which is annoying on IPv4 only boxes.
-UseIPv6				off
+UseIPv6        <%= scope.function_bool2onoff([@use_ipv6]) %>
 # If set on you can experience a longer connection delay in many cases.
-IdentLookups			off
+IdentLookups      off
 
-ServerName			"¬¬U"
-ServerIdent			on "._."
-ServerType			standalone
-DeferWelcome			off
+ServerName      "<%= @servername %>"
+<% if defined?(@serverident) -%>
+ServerIdent      on "<%= @serverident %>"
+<% else -%>
+ServerIdent      off
+<% end -%>
+ServerType      standalone
+DeferWelcome      <%= scope.function_bool2onoff([@deferwelcome]) %>
 
-MultilineRFC2228		on
-DefaultServer			on
-ShowSymlinks			on
+MultilineRFC2228    on
+DefaultServer      on
+ShowSymlinks      on
 
-TimeoutNoTransfer		600
-TimeoutStalled			600
-TimeoutIdle			1200
+TimeoutNoTransfer    600
+TimeoutStalled      600
+TimeoutIdle      1200
 
 DisplayLogin                    welcome.msg
-DisplayChdir               	.message true
-ListOptions                	"-l"
+DisplayChdir                 .message true
+ListOptions                  "-l"
 
-DenyFilter			\*.*/
+DenyFilter      \*.*/
 
 # Use this to jail all ftpchroot users in their homes
 DefaultRoot ~ ftpchroot
 
 # Users require a valid shell listed in /etc/shells to login.
 # Use this directive to release that constrain.
-# RequireValidShell		off
+RequireValidShell    <%= scope.function_bool2onoff([@require_valid_shell]) %> 
 
 # Port 21 is the standard FTP port.
-Port				21
+Port        <%= @port %>
 
 # In some cases you have to specify passive ports range to by-pass
 # firewall limitations. Ephemeral ports can be used for that, but
@@ -49,7 +53,7 @@ Port				21
 # If your host was NATted, this option is useful in order to
 # allow passive tranfers to work. You have to use your public
 # address and opening the passive ports used on your firewall as well.
-# MasqueradeAddress		1.2.3.4
+# MasqueradeAddress    1.2.3.4
 
 # This is useful for masquerading address with dynamic IPs:
 # refresh any configured MasqueradeAddress directives every 8 hours
@@ -63,29 +67,29 @@ Port				21
 # in standalone mode, in inetd mode you should use an inetd server
 # that allows you to limit maximum number of processes per service
 # (such as xinetd)
-MaxInstances			30
+MaxInstances      30
 
 # Set the user and group that the server normally runs at.
-User				proftpd
-Group				nogroup
+User        proftpd
+Group        nogroup
 
 # Umask 022 is a good standard umask to prevent new files and dirs
 # (second parm) from being group and world writable.
-Umask				022  022
+Umask        022  022
 # Normally, we want files to be overwriteable.
-AllowOverwrite			on
+AllowOverwrite      on
 
 # Uncomment this if you are using NIS or LDAP via NSS to retrieve passwords:
-# PersistentPasswd		off
+# PersistentPasswd    off
 
 # This is required to use both PAM-based authentication and local passwords
-# AuthOrder			mod_auth_pam.c* mod_auth_unix.c
+# AuthOrder      mod_auth_pam.c* mod_auth_unix.c
 
 # Be warned: use of this directive impacts CPU average load!
 # Uncomment this if you like to see progress and transfer rate with ftpwho
 # in downloads. That is not needed for uploads rates.
 #
-# UseSendFile			off
+# UseSendFile      off
 
 #TransferLog /var/log/proftpd/xferlog
 SystemLog   /var/log/proftpd/proftpd.log
@@ -146,23 +150,23 @@ AdminControlsEngine off
 # A basic anonymous configuration, no upload directories.
 
 # <Anonymous ~ftp>
-#   User				ftp
-#   Group				nogroup
+#   User        ftp
+#   Group        nogroup
 #   # We want clients to be able to login with "anonymous" as well as "ftp"
-#   UserAlias			anonymous ftp
+#   UserAlias      anonymous ftp
 #   # Cosmetic changes, all files belongs to ftp user
-#   DirFakeUser	on ftp
+#   DirFakeUser  on ftp
 #   DirFakeGroup on ftp
 #
-#   RequireValidShell		off
+#   RequireValidShell    off
 #
 #   # Limit the maximum number of anonymous logins
-#   MaxClients			10
+#   MaxClients      10
 #
 #   # We want 'welcome.msg' displayed at login, and '.message' displayed
 #   # in each newly chdired directory.
-#   DisplayLogin			welcome.msg
-#   DisplayChdir		.message
+#   DisplayLogin      welcome.msg
+#   DisplayChdir    .message
 #
 #   # Limit WRITE everywhere in the anonymous chroot
 #   <Directory *>
@@ -175,7 +179,7 @@ AdminControlsEngine off
 #   # <Directory incoming>
 #   #   # Umask 022 is a good standard umask to prevent new files and dirs
 #   #   # (second parm) from being group and world writable.
-#   #   Umask				022  022
+#   #   Umask        022  022
 #   #            <Limit READ WRITE>
 #   #            DenyAll
 #   #            </Limit>
