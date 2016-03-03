@@ -46,12 +46,30 @@ class { 'proftpd::user':
 
 ### proftpd
 
-* **systemlog**: The filename argument should contain an absolute path, and should not be to a file in a nonexistent directory, in a world-writeable directory, or be a symbolic link (unless AllowLogSymlinks is set to on). Use of this directive overrides any facility set by the SyslogFacility directive. Additionally, the special keyword NONE can be used which disables all syslog style logging for the entire configuration.
+* **port** Set the port for the control socket (default: 21)
+* **use_ipv6** Enable/Disable IPv6 support (default: false)
+* **servername** Configure the name displayed to connecting users (default: private server)
+* **serverident** Set the message displayed on connect (default: undef)
+* **deferwelcome** Don't show welcome message until user has authenticated (default: true)
+* **require_valid_shell** Allow connections based on /etc/shells (default: false)
+* **maxinstances** Sets the maximum number of child processes to be spawned (default: 30)
+* **allowoverwrite**  Enable files to be overwritten(default: true)
+* **transferlog** Specify the path to the transfer log (default: undef)
+* **user** Set the user the daemon will run as (default: proftpd)
+* **group** Set the group the server normally runs as (default: nogroup)
+* **systemlog**: The filename argument should contain an absolute path, and should not be to a file in a nonexistent directory, in a world-writeable directory, or be a symbolic link (unless AllowLogSymlinks is set to on). Use of this directive overrides any facility set by the SyslogFacility directive. Additionally, the special keyword NONE can be used which disables all syslog style logging for the entire configuration. (default: /var/log/proftpd/proftpd.log)
 
 ### user
-* username: name of the user to add.
-* password: password of the user to add.
-* home: home of the user to add.
+* **username**: name of the user to add
+* **password**: password of the user to add
+* **home**: home of the user to add
+* **managehome** Whether to manage the home directory (default: true)
+* **allowdupe** Whether to allow duplicate UIDs (default: false)
+* **uid** user ID; must be specified numerically (default: undef)
+* **gid** primary group ID; must be specified numerically (default: undef)
+* **shell** user's shell (default: /bin/false)
+* **chroot** Whether to chroot to user's home (default: true)
+* **disablessh** Whether to disable ssh login. Requires *eyp-openssh* (default: true)
 
 ## Limitations
 
