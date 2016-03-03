@@ -6,14 +6,20 @@ class proftpd (
                 $serverident=undef,
                 $deferwelcome=true,
                 $require_valid_shell=false,
+                $maxinstances='30',
+                $allowoverwrite=true,
+                $transferlog=undef,
+                $systemlog='/var/log/proftpd/proftpd.log',
+                $user='proftpd',
+                $group='nogroup',
               ) inherits proftpd::params {
 
   #
   Exec {
-		path => '/bin:/sbin:/usr/bin:/usr/sbin',
-	}
+    path => '/bin:/sbin:/usr/bin:/usr/sbin',
+  }
 
-  package { $proftpd_package:
+  package { $proftpd::params::proftpd_package:
     ensure => 'installed',
   }
 
@@ -34,10 +40,10 @@ class proftpd (
     ensure  => 'running',
     enable  => true,
     require => [
-                 File['/etc/proftpd/proftpd.conf'],
-                 Group['ftpchroot'],
-                 Package[$proftpd_package],
-               ],
+                File['/etc/proftpd/proftpd.conf'],
+                Group['ftpchroot'],
+                Package[$proftpd::params::proftpd_package],
+              ],
   }
 
 
