@@ -40,7 +40,7 @@ DefaultRoot ~ ftpchroot
 
 # Users require a valid shell listed in /etc/shells to login.
 # Use this directive to release that constrain.
-RequireValidShell    <%= scope.function_bool2onoff([@require_valid_shell]) %> 
+RequireValidShell    <%= scope.function_bool2onoff([@require_valid_shell]) %>
 
 # Port 21 is the standard FTP port.
 Port        <%= @port %>
@@ -67,17 +67,17 @@ Port        <%= @port %>
 # in standalone mode, in inetd mode you should use an inetd server
 # that allows you to limit maximum number of processes per service
 # (such as xinetd)
-MaxInstances      30
+MaxInstances      <%= @maxinstances %>
 
 # Set the user and group that the server normally runs at.
-User        proftpd
-Group        nogroup
+User        <%= @user %>
+Group       <%= @group %>
 
 # Umask 022 is a good standard umask to prevent new files and dirs
 # (second parm) from being group and world writable.
 Umask        022  022
 # Normally, we want files to be overwriteable.
-AllowOverwrite      on
+AllowOverwrite      <%= scope.function_bool2onoff([@allowoverwrite]) %>
 
 # Uncomment this if you are using NIS or LDAP via NSS to retrieve passwords:
 # PersistentPasswd    off
@@ -91,8 +91,11 @@ AllowOverwrite      on
 #
 # UseSendFile      off
 
-#TransferLog /var/log/proftpd/xferlog
-SystemLog   /var/log/proftpd/proftpd.log
+<% if defined?(@transferlog) -%>
+TransferLog <%= @transferlog %>
+<% end -%>
+
+SystemLog   <%= @systemlog %>
 
 # Logging onto /var/log/lastlog is enabled but set to off by default
 #UseLastlog on
