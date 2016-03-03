@@ -8,6 +8,7 @@ define proftpd::user(
                             $gid=undef,
                             $shell='/bin/false',
                             $chroot=true,
+                            $disablessh=true,
                           ) {
   #
   if($chroot)
@@ -31,6 +32,18 @@ define proftpd::user(
     groups     => $groups,
     shell      => $shell,
     require    => $require,
+  }
+
+  if($disablessh)
+  {
+    if(defined(Class['openssh::server']))
+    {
+      openssh::denyuser { $username: }
+    }
+    else
+    {
+      fail('unable to disable ssh, class openssh::server not defined')
+    }
   }
 
 }
