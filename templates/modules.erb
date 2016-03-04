@@ -16,8 +16,12 @@ ModulePath <%= @modulepath %>
 ModuleControlsACLs insmod,rmmod allow user root
 ModuleControlsACLs lsmod allow user *
 
+<% if(@load_ctrlsadmin) -%>
 LoadModule mod_ctrls_admin.c
+<% end -%>
+<% if(@load_tls) -%>
 LoadModule mod_tls.c
+<% end -%>
 
 # Install one of proftpd-mod-mysql, proftpd-mod-pgsql or any other
 # SQL backend engine to use this module and the required backend.
@@ -74,11 +78,15 @@ LoadModule mod_wrap2_file.c
 # Install one of the previous SQL backends and decomment
 # the previous mod_sql.c module to use this
 #LoadModule mod_wrap2_sql.c
+<% if(@load_dynmasq) -%>
 LoadModule mod_dynmasq.c
+<% end -%>
 LoadModule mod_exec.c
 LoadModule mod_shaper.c
 LoadModule mod_ratio.c
+<% if(@load_site_misc) -%>
 LoadModule mod_site_misc.c
+<% end -%>
 
 LoadModule mod_sftp.c
 LoadModule mod_sftp_pam.c
@@ -87,11 +95,21 @@ LoadModule mod_sftp_pam.c
 #LoadModule mod_sftp_sql.c
 
 LoadModule mod_facl.c
+<% if(@load_uniqueid) -%>
 LoadModule mod_unique_id.c
+<% end -%>
+<% if(@load_copy) -%>
 LoadModule mod_copy.c
+<% end -%>
+<% if(@load_deflate) -%>
 LoadModule mod_deflate.c
+<% end -%>
+<% if(@load_ifversion) -%>
 LoadModule mod_ifversion.c
+<% end -%>
+<% if(@load_tlsmemcache) -%>
 LoadModule mod_tls_memcache.c
+<% end -%>
 
 # Install proftpd-mod-geoip to use the GeoIP feature
 #LoadModule mod_geoip.c
