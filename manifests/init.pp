@@ -22,7 +22,7 @@ class proftpd (
     path => '/bin:/sbin:/usr/bin:/usr/sbin',
   }
 
-  if($include_epel)
+  if($proftpd::params::include_epel)
   {
     include ::epel
 
