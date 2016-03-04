@@ -41,6 +41,16 @@ describe 'apache class' do
       it { is_expected.to be_running }
     end
 
+    describe file($proftpconf) do
+      it { should be_file }
+      its(:content) { should match 'puppet managed file' }
+    end
+
+    describe file('/etc/proftpd/modules.conf') do
+      it { should be_file }
+      its(:content) { should match 'puppet managed file' }
+    end
+
   end
 
 end
