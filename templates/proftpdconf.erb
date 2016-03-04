@@ -75,7 +75,7 @@ Group       <%= @group %>
 
 # Umask 022 is a good standard umask to prevent new files and dirs
 # (second parm) from being group and world writable.
-Umask        022  022
+Umask        <%= @umask_files %>  <%= @umask_dirs %>
 # Normally, we want files to be overwriteable.
 AllowOverwrite      <%= scope.function_bool2onoff([@allowoverwrite]) %>
 
@@ -198,4 +198,4 @@ AdminControlsEngine off
 </Limit>
 
 # Include other custom configuration files
-Include /etc/proftpd/conf.d/
+# Include /etc/proftpd/conf.d/
