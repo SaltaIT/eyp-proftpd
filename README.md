@@ -58,6 +58,11 @@ proftpd::user { 'user':
 * **user** Set the user the daemon will run as (default: proftpd)
 * **group** Set the group the server normally runs as (default: nogroup)
 * **systemlog**: The filename argument should contain an absolute path, and should not be to a file in a nonexistent directory, in a world-writeable directory, or be a symbolic link (unless AllowLogSymlinks is set to on). Use of this directive overrides any facility set by the SyslogFacility directive. Additionally, the special keyword NONE can be used which disables all syslog style logging for the entire configuration. (default: /var/log/proftpd/proftpd.log)
+* **user** Set the user the daemon will run as (default: system-dependent)
+* **group** Set the group the server normally runs as (default: system-dependent)
+* **umask_files** Set the default Umask for files (022)
+* **umask_dirs** Set the default Umask for directories (022)
+* **modulepath** Sets the module path (default: system-dependent)
 
 ### user
 * **username**: name of the user to add (default: resource's name)
