@@ -14,6 +14,7 @@ describe 'apache class' do
     		#Vm90YUp1bnRzUGVsU2kK
     		password => '$6$xkGStxTM$TyrthDmlYzXcVsOfNGS1bHUZvddVZImqxNXWGljw2rvijw3yeeA/N9eatMqou003uIb8k8kqWUtf7Ua24aqis0',
     		home => '/tmp/example',
+        disablessh => false,
     	}
 
       EOF
