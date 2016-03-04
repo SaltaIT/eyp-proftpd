@@ -75,7 +75,7 @@ Group       <%= @group %>
 
 # Umask 022 is a good standard umask to prevent new files and dirs
 # (second parm) from being group and world writable.
-Umask        022  022
+Umask        <%= @umask_files %>  <%= @umask_dirs %>
 # Normally, we want files to be overwriteable.
 AllowOverwrite      <%= scope.function_bool2onoff([@allowoverwrite]) %>
 
@@ -134,22 +134,6 @@ ControlsSocket        /var/run/proftpd/proftpd.sock
 AdminControlsEngine off
 </IfModule>
 
-#
-# Alternative authentication frameworks
-#
-#Include /etc/proftpd/ldap.conf
-#Include /etc/proftpd/sql.conf
-
-#
-# This is used for FTPS connections
-#
-#Include /etc/proftpd/tls.conf
-
-#
-# Useful to keep VirtualHost/VirtualRoot directives separated
-#
-#Include /etc/proftpd/virtuals.conf
-
 # A basic anonymous configuration, no upload directories.
 
 # <Anonymous ~ftp>
@@ -196,6 +180,3 @@ AdminControlsEngine off
 <Limit SITE_CHMOD>
   DenyAll
 </Limit>
-
-# Include other custom configuration files
-Include /etc/proftpd/conf.d/
