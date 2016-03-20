@@ -14,7 +14,7 @@ describe 'apache class' do
     		#Vm90YUp1bnRzUGVsU2kK
     		password => '$6$xkGStxTM$TyrthDmlYzXcVsOfNGS1bHUZvddVZImqxNXWGljw2rvijw3yeeA/N9eatMqou003uIb8k8kqWUtf7Ua24aqis0',
     		home => '/tmp/example',
-        disablessh => false,
+        disable_ssh_user => false,
     	}
 
       EOF
@@ -49,6 +49,16 @@ describe 'apache class' do
     describe file('/etc/proftpd/modules.conf') do
       it { should be_file }
       its(:content) { should match 'puppet managed file' }
+    end
+
+    describe file('/etc/passwd') do
+      it { should be_file }
+      its(:content) { should match '^example:' }
+    end
+
+    describe file('/etc/shadow') do
+      it { should be_file }
+      its(:content) { should match '^example:' }
     end
 
   end
