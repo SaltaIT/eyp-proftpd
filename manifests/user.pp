@@ -86,6 +86,7 @@ define proftpd::user(
     groups     => $groups,
     shell      => $shell,
     require    => $require,
+    membership => inclusive,
   }
 
   if($disable_ssh_user)
