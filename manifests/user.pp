@@ -10,24 +10,28 @@ define proftpd::user(
                             $chroot=true,
                             $disable_ssh_user=true,
                             $restrict_ssh_to_sftp=false,
-                            $groups=undef,
+                            $extra_groups=undef,
                           ) {
   #
   if($chroot)
   {
     if($restrict_ssh_to_sftp)
     {
-      if ($groups == undef)
+      if ($extra_groups == undef)
       {
         $groups=[ 'ftpchroot', 'sftp' ]
+      } else {
+        $groups=$extra_groups
       }
       $require=Group[ 'ftpchroot', 'sftp' ]
     }
     else
     {
-      if ($groups == undef)
+      if ($extra_groups == undef)
       {
         $groups=[ 'ftpchroot' ]
+      } else {
+        $groups=$extra_groups
       }
       $require=Group['ftpchroot']
     }
@@ -36,12 +40,22 @@ define proftpd::user(
   {
     if($restrict_ssh_to_sftp)
     {
-      $groups=[ 'sftp' ]
+      if ($extra_groups == undef)
+      {
+        $groups=[ 'sftp' ]
+      } else {
+        $groups=$extra_groups
+      }
       $require=Group['sftp']
     }
     else
     {
-      $groups=undef
+      if ($extra_groups == undef)
+      {
+        $groups=undef
+      } else {
+        $groups=$extra_groups
+      }
       $require=undef
     }
   }
@@ -56,9 +70,9 @@ define proftpd::user(
     }
   }
 
-  if ($groups != undef)
+  if ($extra_groups != undef)
   {
-    validate_array($groups)
+    validate_array($extra_groups)
 
   }
 
