@@ -10,18 +10,29 @@ define proftpd::user(
                             $chroot               = true,
                             $disable_ssh_user     = true,
                             $restrict_ssh_to_sftp = false,
+                            $extra_groups=undef,
                           ) {
   #
   if($chroot)
   {
     if($restrict_ssh_to_sftp)
     {
-      $groups=[ 'ftpchroot', 'sftp' ]
+      if ($extra_groups == undef)
+      {
+        $groups=[ 'ftpchroot', 'sftp' ]
+      } else {
+        $groups=$extra_groups
+      }
       $require=Group[ 'ftpchroot', 'sftp' ]
     }
     else
     {
-      $groups=[ 'ftpchroot' ]
+      if ($extra_groups == undef)
+      {
+        $groups=[ 'ftpchroot' ]
+      } else {
+        $groups=$extra_groups
+      }
       $require=Group['ftpchroot']
     }
   }
@@ -29,12 +40,22 @@ define proftpd::user(
   {
     if($restrict_ssh_to_sftp)
     {
-      $groups=[ 'sftp' ]
+      if ($extra_groups == undef)
+      {
+        $groups=[ 'sftp' ]
+      } else {
+        $groups=$extra_groups
+      }
       $require=Group['sftp']
     }
     else
     {
-      $groups=undef
+      if ($extra_groups == undef)
+      {
+        $groups=undef
+      } else {
+        $groups=$extra_groups
+      }
       $require=undef
     }
   }
@@ -49,6 +70,12 @@ define proftpd::user(
     }
   }
 
+  if ($extra_groups != undef)
+  {
+    validate_array($extra_groups)
+
+  }
+
   user { $username:
     uid        => $uid,
     gid        => $gid,
@@ -59,6 +86,7 @@ define proftpd::user(
     groups     => $groups,
     shell      => $shell,
     require    => $require,
+    membership => inclusive,
   }
 
   if($disable_ssh_user)
