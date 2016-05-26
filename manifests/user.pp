@@ -1,17 +1,17 @@
 define proftpd::user(
-                            $username             = $name,
-                            $password             = undef,
-                            $home                 = undef,
-                            $managehome           = true,
-                            $allowdupe            = false,
-                            $uid                  = undef,
-                            $gid                  = undef,
-                            $shell                = '/bin/false',
-                            $chroot               = true,
-                            $disable_ssh_user     = true,
-                            $restrict_ssh_to_sftp = false,
-                            $extra_groups=undef,
-                          ) {
+                      $username             = $name,
+                      $password             = undef,
+                      $home                 = undef,
+                      $managehome           = true,
+                      $allowdupe            = false,
+                      $uid                  = undef,
+                      $gid                  = undef,
+                      $shell                = '/bin/false',
+                      $chroot               = true,
+                      $disable_ssh_user     = true,
+                      $restrict_ssh_to_sftp = false,
+                      $extra_groups         = undef,
+                    ) {
   #
   if($chroot)
   {
