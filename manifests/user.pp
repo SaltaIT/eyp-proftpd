@@ -73,7 +73,6 @@ define proftpd::user(
   if ($extra_groups != undef)
   {
     validate_array($extra_groups)
-
   }
 
   user { $username:
