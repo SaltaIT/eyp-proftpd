@@ -10,28 +10,28 @@ define proftpd::user(
                       $chroot               = true,
                       $disable_ssh_user     = true,
                       $restrict_ssh_to_sftp = false,
-                      $extra_groups         = undef,
+                      $groups         = undef,
                     ) {
   #
   if($chroot)
   {
     if($restrict_ssh_to_sftp)
     {
-      if ($extra_groups == undef)
+      if ($groups == undef)
       {
-        $groups=[ 'ftpchroot', 'sftp' ]
+        $user_groups=[ 'ftpchroot', 'sftp' ]
       } else {
-        $groups=$extra_groups
+        $user_groups=$groups
       }
       $require=Group[ 'ftpchroot', 'sftp' ]
     }
     else
     {
-      if ($extra_groups == undef)
+      if ($groups == undef)
       {
-        $groups=[ 'ftpchroot' ]
+        $user_groups=[ 'ftpchroot' ]
       } else {
-        $groups=$extra_groups
+        $user_groups=$groups
       }
       $require=Group['ftpchroot']
     }
@@ -40,21 +40,21 @@ define proftpd::user(
   {
     if($restrict_ssh_to_sftp)
     {
-      if ($extra_groups == undef)
+      if ($groups == undef)
       {
-        $groups=[ 'sftp' ]
+        $user_groups=[ 'sftp' ]
       } else {
-        $groups=$extra_groups
+        $user_groups=$groups
       }
       $require=Group['sftp']
     }
     else
     {
-      if ($extra_groups == undef)
+      if ($groups == undef)
       {
-        $groups=undef
+        $user_groups=undef
       } else {
-        $groups=$extra_groups
+        $user_groups=$groups
       }
       $require=undef
     }
@@ -70,9 +70,9 @@ define proftpd::user(
     }
   }
 
-  if ($extra_groups != undef)
+  if ($groups != undef)
   {
-    validate_array($extra_groups)
+    validate_array($groups)
   }
 
   user { $username:
@@ -82,7 +82,7 @@ define proftpd::user(
     managehome => $managehome,
     home       => $home,
     allowdupe  => $allowdupe,
-    groups     => $groups,
+    groups     => $user_groups,
     shell      => $shell,
     require    => $require,
     membership => inclusive,
