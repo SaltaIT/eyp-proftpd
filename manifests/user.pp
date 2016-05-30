@@ -1,27 +1,38 @@
 define proftpd::user(
-                            $username=$name,
-                            $password=undef,
-                            $home=undef,
-                            $managehome=true,
-                            $allowdupe=false,
-                            $uid=undef,
-                            $gid=undef,
-                            $shell='/bin/false',
-                            $chroot=true,
-                            $disable_ssh_user=true,
-                            $restrict_ssh_to_sftp=false,
-                          ) {
+                      $username             = $name,
+                      $password             = undef,
+                      $home                 = undef,
+                      $managehome           = true,
+                      $allowdupe            = false,
+                      $uid                  = undef,
+                      $gid                  = undef,
+                      $shell                = '/bin/false',
+                      $chroot               = true,
+                      $disable_ssh_user     = true,
+                      $restrict_ssh_to_sftp = false,
+                      $groups         = undef,
+                    ) {
   #
   if($chroot)
   {
     if($restrict_ssh_to_sftp)
     {
-      $groups=[ 'ftpchroot', 'sftp' ]
+      if ($groups == undef)
+      {
+        $user_groups=[ 'ftpchroot', 'sftp' ]
+      } else {
+        $user_groups=$groups
+      }
       $require=Group[ 'ftpchroot', 'sftp' ]
     }
     else
     {
-      $groups=[ 'ftpchroot' ]
+      if ($groups == undef)
+      {
+        $user_groups=[ 'ftpchroot' ]
+      } else {
+        $user_groups=$groups
+      }
       $require=Group['ftpchroot']
     }
   }
@@ -29,12 +40,22 @@ define proftpd::user(
   {
     if($restrict_ssh_to_sftp)
     {
-      $groups=[ 'sftp' ]
+      if ($groups == undef)
+      {
+        $user_groups=[ 'sftp' ]
+      } else {
+        $user_groups=$groups
+      }
       $require=Group['sftp']
     }
     else
     {
-      $groups=undef
+      if ($groups == undef)
+      {
+        $user_groups=undef
+      } else {
+        $user_groups=$groups
+      }
       $require=undef
     }
   }
@@ -49,6 +70,11 @@ define proftpd::user(
     }
   }
 
+  if ($groups != undef)
+  {
+    validate_array($groups)
+  }
+
   user { $username:
     uid        => $uid,
     gid        => $gid,
@@ -56,9 +82,10 @@ define proftpd::user(
     managehome => $managehome,
     home       => $home,
     allowdupe  => $allowdupe,
-    groups     => $groups,
+    groups     => $user_groups,
     shell      => $shell,
     require    => $require,
+    membership => inclusive,
   }
 
   if($disable_ssh_user)
