@@ -2,6 +2,6 @@ fixtures:
   repositories:
     stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
     epel: "git://github.com/jordiprats/eyp-epel.git"
-    eyplib: "git://github.com/AtlasIT-AM/eyp-eyplib.git"
+    eyplib: "git://github.com/NTTCom-MS/eyp-eyplib.git"
   symlinks:
     proftpd: "#{source_dir}"
