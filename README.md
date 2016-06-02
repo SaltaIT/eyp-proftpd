@@ -63,6 +63,7 @@ proftpd::user { 'user':
 * **umask_files** Set the default Umask for files (022)
 * **umask_dirs** Set the default Umask for directories (022)
 * **modulepath** Sets the module path (default: system-dependent)
+* **blind_directorues** Configure blind directories privided by a list (default: undef)
 
 ### user
 * **username**: name of the user to add (default: resource's name)

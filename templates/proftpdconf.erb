@@ -184,3 +184,13 @@ AdminControlsEngine off
 <Limit SITE_CHMOD>
   DenyAll
 </Limit>
+
+<%- if defined?(@blind_directories) -%>
+   <%- @blind_directories.each do |value| -%>
+<Directory <%= value %>>
+    <Limit LIST NLST MLSD MLST STAT>
+      DenyAll
+    </Limit>
+</Directory>
+   <%- end -%>
+<%- end -%>
