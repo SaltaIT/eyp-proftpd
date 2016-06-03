@@ -15,8 +15,13 @@ class proftpd (
                 $umask_files         = '022',
                 $umask_dirs          = '022',
                 $modulepath          = $proftpd::params::modulepath_default,
+                $blind_directories   = undef,
               ) inherits proftpd::params {
 
+  if($blind_directories != undef)
+  {
+    validate_array($blind_directories)
+  }
   #
   Exec {
     path => '/bin:/sbin:/usr/bin:/usr/sbin',

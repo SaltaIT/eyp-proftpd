@@ -8,7 +8,9 @@ describe 'apache class' do
     it 'should work with no errors' do
       pp = <<-EOF
 
-      class { 'proftpd': }
+      class { 'proftpd':
+              blind_directories => [ '/tmp/example' ],
+      }
 
     	proftpd::user { 'example':
     		#Vm90YUp1bnRzUGVsU2kK
@@ -74,7 +76,7 @@ describe 'apache class' do
      end
 
     it "check ftp listing" do
-      expect(shell("curl ftp://localhost/ --user example:Vm90YUp1bnRzUGVsU2kK -l 2>&1 | grep test.list.ftp").exit_code).to be_zero
+      expect(shell("curl ftp://localhost/ --user example:Vm90YUp1bnRzUGVsU2kK -l 2>&1 | wc -l | grep 3").exit_code).to be_zero
     end
 
     it "check ftp uploading" do
