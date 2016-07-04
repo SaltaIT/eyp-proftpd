@@ -113,7 +113,7 @@ proftpd::limitlogin { 'test':
 #### proftpd::limitlogin
 
 * **limitloginname** (default: resource's name)
-* **limituser**: user array to limit (default: undef)
+* **limituser**: array of users to limit (default: undef)
 * **allowclass**: AllowClass (default: undef)
 * **defaultaction**: default action to this limitlogin instance (default: **DenyAll**)
 
