@@ -43,14 +43,20 @@ proftpd::user { 'user':
 ```
 
 ## Usage
+
 ### Blind directories
-```blindir
-class { 'proftpd': 
+
+```puppet
+class { 'proftpd':
         blind_directories => [ '/tmp/example' ],
 }
 ```
+
 ## Reference
-### proftpd
+
+### classes
+
+#### proftpd
 
 * **port** Set the port for the control socket (default: 21)
 * **use_ipv6** Enable/Disable IPv6 support (default: false)
@@ -71,7 +77,10 @@ class { 'proftpd':
 * **modulepath** Sets the module path (default: system-dependent)
 * **blind_directorues** Configure blind directories provided by a list (default: undef)
 
-### user
+### defines
+
+#### proftpd::user
+
 * **username**: name of the user to add (default: resource's name)
 * **password**: password of the user to add
 * **home**: home of the user to add
