@@ -48,13 +48,18 @@ class proftpd (
     ensure => 'present',
   }
 
-  file { $proftpd::params::proftpd_conf:
+  concat { $proftpd::params::proftpd_conf:
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("${module_name}/proftpdconf.erb"),
     notify  => Service['proftpd'],
+  }
+
+  concat::fragment{ "base ${proftpd::params::proftpd_conf}":
+    target  => $proftpd::params::proftpd_conf,
+    order   => '00',
+    content => template("${module_name}/proftpdconf.erb"),
   }
 
   file { $proftpd::params::confdir:
