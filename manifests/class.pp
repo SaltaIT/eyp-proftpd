@@ -1,6 +1,6 @@
 define proftpd::class (
                         $ip,
-                        $classname=$name,
+                        $classname = $name,
                       ) {
 
   validate_array($ip)

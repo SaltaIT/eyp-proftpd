@@ -2,7 +2,7 @@
 # concat order $proftpd::params::proftpd_conf
 # 00 base
 # 10 class
-#
+# 20 limit login
 class proftpd (
                 $port                = '21',
                 $use_ipv6            = false,
