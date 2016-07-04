@@ -1,4 +1,8 @@
 #
+# concat order $proftpd::params::proftpd_conf
+# 00 base
+# 10 class
+# 20 limit login
 class proftpd (
                 $port                = '21',
                 $use_ipv6            = false,
@@ -48,13 +52,18 @@ class proftpd (
     ensure => 'present',
   }
 
-  file { $proftpd::params::proftpd_conf:
+  concat { $proftpd::params::proftpd_conf:
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("${module_name}/proftpdconf.erb"),
     notify  => Service['proftpd'],
+  }
+
+  concat::fragment{ "base ${proftpd::params::proftpd_conf}":
+    target  => $proftpd::params::proftpd_conf,
+    order   => '00',
+    content => template("${module_name}/proftpdconf.erb"),
   }
 
   file { $proftpd::params::confdir:

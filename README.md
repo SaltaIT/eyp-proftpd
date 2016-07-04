@@ -43,14 +43,33 @@ proftpd::user { 'user':
 ```
 
 ## Usage
+
 ### Blind directories
-```blindir
-class { 'proftpd': 
+
+```puppet
+class { 'proftpd':
         blind_directories => [ '/tmp/example' ],
 }
 ```
+
+### IP restrictions
+
+```puppet
+proftpd::class { 'allowipclass':
+  ip => [ '1.2.3.4', '5.6.7.8' ],
+}
+
+proftpd::limitlogin { 'test':
+  limituser => [ 'caca' ],
+  allowclass => 'allowipclass',
+}
+```
+
 ## Reference
-### proftpd
+
+### classes
+
+#### proftpd
 
 * **port** Set the port for the control socket (default: 21)
 * **use_ipv6** Enable/Disable IPv6 support (default: false)
@@ -71,7 +90,10 @@ class { 'proftpd':
 * **modulepath** Sets the module path (default: system-dependent)
 * **blind_directorues** Configure blind directories provided by a list (default: undef)
 
-### user
+### defines
+
+#### proftpd::user
+
 * **username**: name of the user to add (default: resource's name)
 * **password**: password of the user to add
 * **home**: home of the user to add
@@ -82,6 +104,18 @@ class { 'proftpd':
 * **shell** user's shell (default: /bin/false)
 * **chroot** Whether to chroot to user's home (default: true)
 * **disablessh** Whether to disable ssh login. Requires *eyp-openssh* (default: true)
+
+#### proftpd::class
+
+* **ip**: IP array
+* **classname**: (default: resource's name)
+
+#### proftpd::limitlogin
+
+* **limitloginname** (default: resource's name)
+* **limituser**: user array to limit (default: undef)
+* **allowclass**: AllowClass (default: undef)
+* **defaultaction**: default action to this limitlogin instance (default: **DenyAll**)
 
 ## Limitations
 

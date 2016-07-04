@@ -1,0 +1,20 @@
+
+<% if defined?(@limituser) -%>
+  <%- @limituser.each do |value| -%>
+<IfUser <%= value %>>
+  <Limit LOGIN>
+    <%- if defined?(@allowclass) -%>
+    AllowClass <%= @allowclass %>
+    <%- end -%>
+    <%= @defaultaction %>
+  </Limit>
+</IfUser>
+  <%- end -%>
+<% else -%>
+<Limit LOGIN>
+  <%- if defined?(@allowclass) -%>
+  AllowClass <%= @allowclass %>
+  <%- end -%>
+  <%= @defaultaction %>
+</Limit>
+<% end -%>
