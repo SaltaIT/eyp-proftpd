@@ -52,6 +52,19 @@ class { 'proftpd':
 }
 ```
 
+### IP restrictions
+
+```puppet
+proftpd::class { 'allowipclass':
+  ip => [ '1.2.3.4', '5.6.7.8' ],
+}
+
+proftpd::limitlogin { 'test':
+  limituser => [ 'caca' ],
+  allowclass => 'allowipclass',
+}
+```
+
 ## Reference
 
 ### classes
@@ -91,6 +104,18 @@ class { 'proftpd':
 * **shell** user's shell (default: /bin/false)
 * **chroot** Whether to chroot to user's home (default: true)
 * **disablessh** Whether to disable ssh login. Requires *eyp-openssh* (default: true)
+
+#### proftpd::class
+
+* **ip**: IP array
+* **classname**: (default: resource's name)
+
+#### proftpd::limitlogin
+
+* **limitloginname** (default: resource's name)
+* **limituser**: user array to limit (default: undef)
+* **allowclass**: AllowClass (default: undef)
+* **defaultaction**: default action to this limitlogin instance (default: **DenyAll**)
 
 ## Limitations
 
