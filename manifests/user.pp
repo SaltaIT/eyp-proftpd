@@ -10,7 +10,8 @@ define proftpd::user(
                       $chroot               = true,
                       $disable_ssh_user     = true,
                       $restrict_ssh_to_sftp = false,
-                      $groups         = undef,
+                      $groups               = undef,
+                      $login_ips            = undef,
                     ) {
   #
   if($chroot)
@@ -58,6 +59,21 @@ define proftpd::user(
       }
       $require=undef
     }
+  }
+
+  if($login_ips!=undef)
+  {
+    validate_array($login_ips)
+
+    proftpd::class { "loginips_${username}":
+      ip => $login_ips,
+    }
+    ->
+    proftpd::limitlogin { "limit_login_${username}":
+      limituser => [ $username ],
+      allowclass => "loginips_${username}",
+    }
+
   }
 
   if($restrict_ssh_to_sftp)

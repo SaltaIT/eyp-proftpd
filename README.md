@@ -65,6 +65,8 @@ proftpd::limitlogin { 'test':
 }
 ```
 
+this is automatically added if **proftpd::user::login_ips** is used
+
 ## Reference
 
 ### classes
@@ -97,13 +99,14 @@ proftpd::limitlogin { 'test':
 * **username**: name of the user to add (default: resource's name)
 * **password**: password of the user to add
 * **home**: home of the user to add
-* **managehome** Whether to manage the home directory (default: true)
-* **allowdupe** Whether to allow duplicate UIDs (default: false)
-* **uid** user ID; must be specified numerically (default: undef)
-* **gid** primary group ID; must be specified numerically (default: undef)
-* **shell** user's shell (default: /bin/false)
-* **chroot** Whether to chroot to user's home (default: true)
-* **disablessh** Whether to disable ssh login. Requires *eyp-openssh* (default: true)
+* **managehome**: Whether to manage the home directory (default: true)
+* **allowdupe**: Whether to allow duplicate UIDs (default: false)
+* **uid**: user ID; must be specified numerically (default: undef)
+* **gid**: primary group ID; must be specified numerically (default: undef)
+* **shell**: user's shell (default: /bin/false)
+* **chroot**: Whether to chroot to user's home (default: true)
+* **disablessh**: Whether to disable ssh login. Requires *eyp-openssh* (default: true)
+* **login_ips**: list of IPs allowed to login - **proftpd only** (default: undef)
 
 #### proftpd::class
 
@@ -113,7 +116,7 @@ proftpd::limitlogin { 'test':
 #### proftpd::limitlogin
 
 * **limitloginname** (default: resource's name)
-* **limituser**: user array to limit (default: undef)
+* **limituser**: array of users to limit (default: undef)
 * **allowclass**: AllowClass (default: undef)
 * **defaultaction**: default action to this limitlogin instance (default: **DenyAll**)
 
