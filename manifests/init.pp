@@ -53,11 +53,11 @@ class proftpd (
   }
 
   concat { $proftpd::params::proftpd_conf:
-    ensure  => 'present',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    notify  => Service['proftpd'],
+    ensure => 'present',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    notify => Service['proftpd'],
   }
 
   concat::fragment{ "base ${proftpd::params::proftpd_conf}":
