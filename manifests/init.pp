@@ -90,7 +90,7 @@ class proftpd (
     ensure  => 'running',
     enable  => true,
     require => [
-                File[$proftpd::params::proftpd_conf],
+                Concat[$proftpd::params::proftpd_conf],
                 Group['ftpchroot'],
                 Package[$proftpd::params::proftpd_package],
               ],
