@@ -70,7 +70,7 @@ define proftpd::user(
     }
     ->
     proftpd::limitlogin { "limit_login_${username}":
-      limituser => [ $username ],
+      limituser  => [ $username ],
       allowclass => "loginips_${username}",
     }
 
