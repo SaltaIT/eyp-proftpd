@@ -91,6 +91,7 @@ this is automatically added if **proftpd::user::login_ips** is used
 * **umask_dirs** Set the default Umask for directories (022)
 * **modulepath** Sets the module path (default: system-dependent)
 * **blind_directorues** Configure blind directories provided by a list (default: undef)
+* **defaultroot** Sets default chroot directory (default: undef)
 
 ### defines
 

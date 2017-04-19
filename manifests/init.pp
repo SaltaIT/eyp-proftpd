@@ -20,6 +20,7 @@ class proftpd (
                 $umask_dirs          = '022',
                 $modulepath          = $proftpd::params::modulepath_default,
                 $blind_directories   = undef,
+                $defaultrooot        = undef,
               ) inherits proftpd::params {
 
   if($blind_directories != undef)
