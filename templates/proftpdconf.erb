@@ -41,11 +41,7 @@ DenyFilter      \*.*/
 
 # Use this to jail all ftpchroot users in their homes
 
-<% if defined?(@defaultrooot) -%>
 DefaultRoot <%= @defaultrooot %> ftpchroot
-<% else -%>
-DefaultRoot ~ ftpchroot
-<% end -%>
 
 # Users require a valid shell listed in /etc/shells to login.
 # Use this directive to release that constrain.
