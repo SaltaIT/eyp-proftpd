@@ -40,7 +40,8 @@ ListOptions                  "-l"
 DenyFilter      \*.*/
 
 # Use this to jail all ftpchroot users in their homes
-DefaultRoot ~ ftpchroot
+
+DefaultRoot <%= @defaultrooot %> ftpchroot
 
 # Users require a valid shell listed in /etc/shells to login.
 # Use this directive to release that constrain.
