@@ -68,7 +68,7 @@ define proftpd::user(
     proftpd::class { "loginips_${username}":
       ip => $login_ips,
     }
-    
+
     ->
 
     proftpd::limitlogin { "limit_login_${username}":
