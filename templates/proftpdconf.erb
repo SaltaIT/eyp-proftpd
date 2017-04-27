@@ -53,12 +53,16 @@ Port        <%= @port %>
 # In some cases you have to specify passive ports range to by-pass
 # firewall limitations. Ephemeral ports can be used for that, but
 # feel free to use a more narrow range.
-# PassivePorts                  49152 65534
+PassivePorts <%= @min_passive_port %> <%= @max_passive_port %>
 
 # If your host was NATted, this option is useful in order to
 # allow passive tranfers to work. You have to use your public
 # address and opening the passive ports used on your firewall as well.
+<% if defined?(@masquerade_address) -%>
+MasqueradeAddress    <%= @masquerade_address %>
+<% else -%>
 # MasqueradeAddress    1.2.3.4
+<% end -%>
 
 # This is useful for masquerading address with dynamic IPs:
 # refresh any configured MasqueradeAddress directives every 8 hours

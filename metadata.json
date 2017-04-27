@@ -1,6 +1,6 @@
 {
   "name": "eyp-proftpd",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "author": "eyp",
   "summary": "proftpd with chroot",
   "license": "Apache-2.0",
