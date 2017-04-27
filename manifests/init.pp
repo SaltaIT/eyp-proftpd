@@ -30,7 +30,7 @@ class proftpd (
   {
     validate_array($blind_directories)
   }
-  #
+
   Exec {
     path => '/bin:/sbin:/usr/bin:/usr/sbin',
   }
