@@ -17,17 +17,17 @@ describe 'apache class' do
         disable_ssh_user => false,
     	}
 
-        file { '/tmp/example/test.list.ftp':
-          ensure => 'present',
-          content => "\nTestFTPls\n",
-          require => Proftpd::User['example'],
-        }
+      file { '/tmp/example/test.list.ftp':
+        ensure => 'present',
+        content => "\nTestFTPls\n",
+        require => Proftpd::User['example'],
+      }
 
-        file { '/tmp/test.upload.ftp':
-          ensure => 'present',
-          content => "\nTestFTPupload\n",
-          require => Proftpd::User['example'],
-        }
+      file { '/tmp/test.upload.ftp':
+        ensure => 'present',
+        content => "\nTestFTPupload\n",
+        require => Proftpd::User['example'],
+      }
 
       EOF
 
