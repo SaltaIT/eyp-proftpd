@@ -1,3 +1,4 @@
+# puppet2sitepp @proftpdlimitlogins
 define proftpd::limitlogin(
                             $limitloginname = $name,
                             $limituser      = undef,

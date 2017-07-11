@@ -1,3 +1,4 @@
+# puppet2sitepp @proftpdclasses
 define proftpd::class (
                         $ip,
                         $classname = $name,

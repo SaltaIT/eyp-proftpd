@@ -1,3 +1,4 @@
+# puppet2sitepp @ftpusers
 define proftpd::user(
                       $username             = $name,
                       $password             = undef,
