@@ -142,7 +142,7 @@ define proftpd::user(
   elsif ($ensure=='absent')
   {
     user { $username:
-      enseure    => $ensure,
+      ensure     => $ensure,
       uid        => $uid,
       gid        => $gid,
       password   => $password,
