@@ -15,7 +15,7 @@ define proftpd::user(
                       $groups               = undef,
                       $login_ips            = undef,
                     ) {
-  if($enseure=="present")
+  if($ensure=='present')
   {
     if($chroot)
     {
