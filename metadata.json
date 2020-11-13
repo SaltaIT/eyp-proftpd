@@ -1,7 +1,7 @@
 {
   "name": "eyp-proftpd",
   "version": "0.2.12",
-  "author": "eyp",
+  "author": "Jordi Prats",
   "summary": "proftpd with chroot",
   "license": "Apache-2.0",
   "source": "https://github.com/SaltaIT/eyp-proftpd",
