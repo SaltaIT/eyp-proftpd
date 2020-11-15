@@ -2,7 +2,7 @@
 
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-**NTTCom-MS/eyp-proftpd**: [![Build Status](https://travis-ci.org/NTTCom-MS/eyp-proftpd.png?branch=master)](https://travis-ci.org/NTTCom-MS/eyp-proftpd)
+**SaltaIT/eyp-proftpd**: [![Build Status](https://travis-ci.org/SaltaIT/eyp-proftpd.png?branch=master)](https://travis-ci.org/SaltaIT/eyp-proftpd)
 
 #### Table of Contents
 
